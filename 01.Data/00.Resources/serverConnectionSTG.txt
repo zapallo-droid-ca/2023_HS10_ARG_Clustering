@@ -1,0 +1,4 @@
+Driver={SQL Server};
+Server=LATITUDE7480\SQLEXPRESS;
+Database=iDevelopStg;
+Trusted_Connection=yes;
