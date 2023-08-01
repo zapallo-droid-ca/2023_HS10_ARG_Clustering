@@ -22,14 +22,13 @@ wd = 'C:/Users/jrab9/OneDrive/08.Github/2023.HS10-ARG.Clustering/01.Data/'
 
 os.chdir(wd)
 
-
 #- Data-Warehouse Credentials
 serverConnectString = open(wd + '/00.Resources/serverConnectionSTG.txt').read()
-
 
 ##-- DATA
 ##Queries
 dfM_q = open(wd + '/00.Resources/dfM_q.sql').read()
+dfY_q = open(wd + '/00.Resources/dfY_q.sql').read()
 
 #- DB Connection
 conn = pyodbc.connect(serverConnectString)
@@ -40,6 +39,9 @@ cursor = conn.cursor()
 dfM = pd.read_sql(dfM_q, conn)
 dfM_copy = dfM.copy()
 print(f'Monthly Data DF has been readed with {dfM.shape} shape')
+
+dfY = pd.read_sql(dfY_q, conn)
+print(f'Yearly Data DF has been readed with {dfY.shape} shape')
 
 conn.close()
 
@@ -184,3 +186,8 @@ print(df.shape)
 
 #Export
 df.to_csv(wd + '/dfM.csv.gz', index = csvAttr_exp['index'], sep = csvAttr_exp['sep'], encoding = csvAttr_exp['encoding'])
+dfY.to_csv(wd + '/dfY.csv.gz', index = csvAttr_exp['index'], sep = csvAttr_exp['sep'], encoding = csvAttr_exp['encoding'])
+
+
+                
+                
